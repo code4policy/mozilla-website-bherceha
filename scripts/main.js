@@ -1,33 +1,27 @@
 const myImage = document.querySelector("img");
+const revealButton = document.querySelector("#reveal-fox");
+const hideButton = document.querySelector("#hide-fox");
+const changeUserButton = document.querySelector("#change-user");
+const myHeading = document.querySelector("h1");
+
+const defaultFoxSrc = "images/firefox-icon.png";
+const surpriseFoxSrc = "images/firefox2.png";
+
+const showSurpriseFox = () => {
+  myImage.setAttribute("src", surpriseFoxSrc);
+};
+
+const hideSurpriseFox = () => {
+  myImage.setAttribute("src", defaultFoxSrc);
+};
 
 myImage.addEventListener("click", () => {
   const mySrc = myImage.getAttribute("src");
-  if (mySrc === "images/firefox-icon.png") {
-    myImage.setAttribute("src", "images/firefox2.png");
-  } else {
-    myImage.setAttribute("src", "images/firefox-icon.png");
-  }
+  myImage.setAttribute("src", mySrc === defaultFoxSrc ? surpriseFoxSrc : defaultFoxSrc);
 });
 
-let myButton = document.querySelector("button");
-let myHeading = document.querySelector("h1");
-
-function setUserName() {
-  const myName = prompt("Please enter your name.");
-  localStorage.setItem("name", myName);
-  myHeading.textContent = `Mozilla is cool, ${myName}`;
-}
-
-if (!localStorage.getItem("name")) {
-  setUserName();
-} else {
-  const storedName = localStorage.getItem("name");
-  myHeading.textContent = `Mozilla is cool, ${storedName}`;
-}
-
-myButton.addEventListener("click", () => {
-  setUserName();
-});
+revealButton?.addEventListener("click", showSurpriseFox);
+hideButton?.addEventListener("click", hideSurpriseFox);
 
 function setUserName() {
   const myName = prompt("Please enter your name.");
@@ -38,3 +32,14 @@ function setUserName() {
     myHeading.textContent = `Mozilla is cool, ${myName}`;
   }
 }
+
+if (!localStorage.getItem("name")) {
+  setUserName();
+} else {
+  const storedName = localStorage.getItem("name");
+  myHeading.textContent = `Mozilla is cool, ${storedName}`;
+}
+
+changeUserButton?.addEventListener("click", () => {
+  setUserName();
+});

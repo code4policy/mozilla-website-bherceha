@@ -32,6 +32,14 @@ img {
   max-width: 100%;
 }
 
+.fox-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0 20px;
+  flex-wrap: wrap;
+}
+
 p,
 li {
   font-size: 16px;
