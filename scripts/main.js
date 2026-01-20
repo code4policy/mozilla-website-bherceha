@@ -7,6 +7,22 @@ const myHeading = document.querySelector("h1");
 const defaultFoxSrc = "images/firefox-icon.png";
 const surpriseFoxSrc = "images/firefox2.png";
 
+const lockImageSize = () => {
+  if (myImage.dataset.lockedSize === "true") return; // Avoid resizing after first lock
+  const { naturalWidth, naturalHeight } = myImage;
+  if (naturalWidth && naturalHeight) {
+    myImage.setAttribute("width", naturalWidth);
+    myImage.setAttribute("height", naturalHeight);
+    myImage.dataset.lockedSize = "true";
+  }
+};
+
+if (myImage.complete) {
+  lockImageSize();
+} else {
+  myImage.addEventListener("load", lockImageSize, { once: true });
+}
+
 const showSurpriseFox = () => {
   myImage.setAttribute("src", surpriseFoxSrc);
 };
